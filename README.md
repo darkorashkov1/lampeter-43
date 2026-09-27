@@ -1,32 +1,18 @@
-# React + TypeScript + Vite
+# Lampeter 43
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> A modern, responsive web application built with React, TypeScript, Vite, and Firebase.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Responsive Design:** Optimized for seamless viewing across mobile, tablet, and desktop devices.
+- **Interactive UI:** Dynamic components for guest inquiries, contact forms, and property details.
+- **Firebase Integration:** Secure backend connectivity using Firebase Firestore for instant contact form and inquiry submissions.
+- **Multi-Language Support:** Easily switch between languages to accommodate international visitors.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack & Tooling
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- **Frontend:** React, TypeScript, Vite (using `@vitejs/plugin-react-swc`), Tailwind CSS / Lucide Icons
+- **Backend / Database:** Firebase Firestore
+- **Linter:** Oxlint (with React & TypeScript plugins)
