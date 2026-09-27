@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, X, Shield, Clock, Users, VolumeX, Ban, Key } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { db } from "../firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -13,24 +15,23 @@ export const Footer: React.FC = () => {
     setSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
 
     try {
-      const response = await fetch("https://formspree.io/f/xrpborbk", {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+      await addDoc(collection(db, "inquiries"), {
+        name,
+        email,
+        message,
+        createdAt: serverTimestamp(),
+        status: "new"
       });
 
-      if (response.ok) {
-        setSubmitted(true);
-      } else {
-        alert("There was a problem submitting the form. Please try again or email us directly.");
-      }
+      setSubmitted(true);
     } catch (error) {
-      console.error("Submission error:", error);
-      alert("Network error. Please check your connection and try again.");
+      console.error("Firebase submission error:", error);
+      alert("There was a problem submitting your inquiry. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
     }
