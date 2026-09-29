@@ -14,7 +14,8 @@ export const Footer: React.FC = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
+    const formElement = e.currentTarget;
+    const formData = new FormData(formElement);
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
@@ -28,9 +29,21 @@ export const Footer: React.FC = () => {
         status: "new"
       });
 
-      setSubmitted(true);
+      const response = await fetch("https://formspree.io/f/xrpborbk", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        throw new Error("Failed to send via Formspree");
+      }
     } catch (error) {
-      console.error("Firebase submission error:", error);
+      console.error("Submission error:", error);
       alert("There was a problem submitting your inquiry. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
